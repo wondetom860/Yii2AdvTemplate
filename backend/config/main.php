@@ -12,14 +12,18 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'aliases' => [
+        '@mdm/admin' => '@backend/extensions/mdmsoft/yii2-admin',
+        '@npm'   => '@vendor/npm-asset',
+        // for example: '@mdm/admin' => '@app/extensions/mdm/yii2-admin-2.0.0',
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
             'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
         'session' => [
@@ -34,6 +38,9 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+        ],
+        'admin' => [
+            'class' => '@mdmadmin/Module',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -70,4 +77,12 @@ return [
         ]
     ],
     'params' => $params,
+    'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+            // 'fileMap' => [
+            //     // 'main' => 'main.php',
+            // ],
+        ],
+    ],
 ];

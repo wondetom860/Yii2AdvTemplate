@@ -19,4 +19,6 @@ class AdminLteAsset extends AssetBundle
         'hail812\adminlte3\assets\BaseAsset',
         'hail812\adminlte3\assets\PluginAsset'
     ];
+
+    
 }

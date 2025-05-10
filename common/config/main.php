@@ -27,9 +27,4 @@ return [
         //     'appendTimestamp' => true,
         // ],
     ],
-    'modules' => [
-        'admin' => [
-            'class' => 'mdm\admin\Module',
-        ],
-    ],
 ];
