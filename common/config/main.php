@@ -16,7 +16,7 @@ return [
             // 'cache' => 'cache',
         ],
         'user' => [
-            // 'class' => 'common\models\User',
+            'class' => 'common\models\User',
             'identityClass' => 'common\models\User',
             'loginUrl'=>['/site/login'],
             'enableAutoLogin' => false,
