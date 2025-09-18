@@ -1,17 +1,3 @@
-Yii2 Template ready made for web app development.
+A Dynamic web page for Ethiopian Defence University
 
-Included all necessary plugins and configured.
-
-Plugins Installed:
-
-    RBAC
-    synfonyMialer
-    andegna calendar
-    admin LTE
-    ljaxx - lnaguage picker
-
-    and others.
-
-you can clone this template and proceed with the main part of your logic.
-
-Have fun coding:
+This web site is designed by 2<sup>nd</sup> Lt. <code><a href="https://github.com/wondetom860">WONDETOM</a></code>
