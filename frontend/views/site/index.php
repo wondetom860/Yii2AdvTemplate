@@ -4,6 +4,9 @@
 
 $this->title = Yii::$app->params['APP_NAME'];
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerCssFile('/css/toastr.css', ['depends' => [\yii\web\YiiAsset::class]]);
+$this->registerJsFile('/js/toastr.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
 <div class="site-index">
     <div class="p-5 mb-4 bg-transparent rounded-3">
@@ -11,6 +14,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <h1 class="display-4">Congratulations! {Front End}</h1>
             <p class="fs-5 fw-light">You have successfully created your Yii-powered application.</p>
             <p><a class="btn btn-lg btn-success" href="https://www.yiiframework.com">Get started with Yii</a></p>
+            <hr>
+            <p class="fs-5 fw-light">This template is built with Yii2 Advanced Template and includes a lot of pre-built features to help you get started quickly. Check out the documentation for more details.</p>
+            <p>
+                <span>
+                    Private Key: <?= $_ENV['RSA_PRIVATE_KEY_BASE64'] ?> <br>
+                    Public Key: <?= $_ENV['RSA_PUBLIC_KEY_BASE64'] ?> <br>
+                    Debugging:  <?= YII_DEBUG ? 'Enabled' : 'Disabled' ?> <br>
+                    Environment:  <?= YII_ENV ?> <br>
+                </span>
+            </p>
         </div>
     </div>
 

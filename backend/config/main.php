@@ -51,9 +51,9 @@ return [
             'showScriptName' => false,
             'rules' => [],
         ],
-        'assetManager' => [
-            'appendTimestamp' => true,
-        ],
+        // 'assetManager' => [
+        //     'appendTimestamp' => true,
+        // ],
         'view' => [
             'theme' => [
                 'basePath' => '@webroot/themes/adminlte/src',

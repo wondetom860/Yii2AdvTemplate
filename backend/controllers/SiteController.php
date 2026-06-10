@@ -62,6 +62,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        Yii::$app->pusher->push('my-channel', 'my-event', ['message' => 'Hello World!, This is a message from TAYMEDIA SS greating page']);
         return $this->render('index');
     }
 

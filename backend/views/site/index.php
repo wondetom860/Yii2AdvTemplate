@@ -4,6 +4,11 @@
 
 $this->title = Yii::$app->params['APP_NAME'];
 $this->params['breadcrumbs'][] = $this->title;
+
+// load toastr assets from frontend/web/js and frontend/web/css
+
+$this->registerCssFile('/css/toastr.css', ['depends' => [\yii\web\YiiAsset::class]]);
+$this->registerJsFile('/js/toastr.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
 <div class="site-index">
 

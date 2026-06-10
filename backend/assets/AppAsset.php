@@ -15,12 +15,14 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
-        'js/notification.js',
+        '/js/pusher.js',
     ];
     public $depends = [
         'yii\web\JqueryAsset',
         'yii\web\YiiAsset',
         'yii\bootstrap5\BootstrapAsset',
+
+
         // 'yii\bootstrap\BootstrapAsset',
     ];
 }
