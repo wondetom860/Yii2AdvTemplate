@@ -5,3 +5,16 @@
         <b>Version</b> <?= Yii::$app->params['APP_VERSION'] ?>
     </div>
 </footer>
+
+<?php
+// $y = \Yii::$app->user->isGuest;
+use yii\bootstrap4\Modal;
+
+Modal::begin([
+    'title' => '<h4>License Management</h4>',
+    'id' => 'modal',
+    'size' => 'modal-lg',
+]);
+echo "<div id='modalContent'>Loading form...</div>";
+Modal::end();
+?>

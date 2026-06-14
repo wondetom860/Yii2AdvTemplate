@@ -25,6 +25,9 @@ return [
                 'encrypted' => true,
             ],
         ],
+        'keyGen' => [
+            'class' => 'common\components\keyGenerator',
+        ],
         'redis' => [
             'class' => 'yii\redis\Connection',
             'hostname' => 'localhost',

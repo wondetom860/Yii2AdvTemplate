@@ -74,6 +74,7 @@ return [
             'user/*',
             'admin/*',
             'site/*',
+            'LICMAN/*'
         ]
     ],
     'params' => $params,
@@ -83,6 +84,9 @@ return [
             // 'fileMap' => [
             //     // 'main' => 'main.php',
             // ],
+        ],
+        'LICMAN' => [
+            'class' => 'backend\modules\licman\LICMan',
         ],
     ],
 ];

@@ -1,9 +1,13 @@
 <?php
 /* @var $content string */
+/**
+ * @var string $content
+ */
 
+use yii\bootstrap4\Alert;
 use yii\bootstrap5\Breadcrumbs;
 ?>
-<div class="content-wrapper bg-light mb-0">
+<div class="content-wrapper bg-light mb-1">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
