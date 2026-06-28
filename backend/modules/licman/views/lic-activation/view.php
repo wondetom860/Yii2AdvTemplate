@@ -6,41 +6,79 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var backend\modules\licman\models\LicActivation $model */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Lic Activations', 'url' => ['index']];
+$this->title = $model->activation_code;
+$this->params['breadcrumbs'][] = ['label' => 'Licence Management', 'url' => ['/LICMAN/default/index']];
+$this->params['breadcrumbs'][] = ['label' => 'License Activations', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="lic-activation-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+        <p class="pull-right float-right">
+            <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-xs']) ?>
+            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger btn-xs',
+                'data' => [
+                    'confirm' => 'Are you sure you want to delete this item?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+        </p>
+    </h3>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'lic_app_relId',
+            [
+                'attribute' => 'lic_app_relId',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return $model->licAppRel->getAppHeader();
+                }
+            ],
             'activation_code',
-            'activation_date',
+            [
+                'attribute' => 'activation_date',
+                'value' => function ($model) {
+                    return date('dMY', $model->activation_date);
+                }
+            ],
             'active_duration',
-            'status',
+            [
+                'attribute' => 'status',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return $model->getStatusText();
+                }
+            ],
             'dec_key',
-            'created_at',
-            'updated_at',
-            'created_by',
-            'updated_by',
-            'data:ntext',
+            [
+                'attribute' => 'created_at',
+                'value' => function ($model) {
+                    return date('dMY', $model->created_at);
+                }
+            ],
+            [
+                'attribute' => 'updated_at',
+                'value' => function ($model) {
+                    return $model->updated_at ? date('dMY', $model->updated_at) : 'NA';
+                }
+            ],
+            [
+                'attribute' => 'created_by',
+                'value' => function ($model) {
+                    return $model->createdBy->username;
+                }
+            ],
+            [
+                'attribute' => 'updated_by',
+                'value' => function ($model) {
+                    return $model->updated_by ? $model->updatedBy->username : 'NA';
+                }
+            ],
+            // 'data:ntext',
         ],
     ]) ?>
 

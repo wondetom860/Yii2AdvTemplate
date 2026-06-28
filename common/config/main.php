@@ -31,9 +31,9 @@ return [
         'redis' => [
             'class' => 'yii\redis\Connection',
             'hostname' => 'localhost',
-            'port' => 6380,
+            'port' => 6379,//6380
             'database' => 0,
-            'useSSL' => true,
+            // 'useSSL' => true,
             // Use contextOptions for more control over the connection (https://www.php.net/manual/en/context.php), not usually needed
             // 'contextOptions' => [
             //     'ssl' => [

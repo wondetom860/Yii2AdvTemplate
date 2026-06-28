@@ -7,6 +7,7 @@ use backend\modules\licman\models\LicActivationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * LicActivationController implements the CRUD actions for LicActivation model.
@@ -81,13 +82,34 @@ class LicActivationController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate(int $app_id)
     {
         $model = new LicActivation();
+        $model->lic_app_relId = $app_id;
+
+        $params = json_decode($model->licAppRel->params_string_json, true);
+        $model->dec_key = $params['dec_key'];
+        $model->active_duration = 365;
+        $model->activation_code = $model->generateActivationCode();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                if ($model->suchExists()) {
+                    Yii::$app->session->setFlash('error', 'Such entry already exists.');
+                } else {
+                    $model->activation_date = strtotime($model->activation_date);
+                    $model->status = $model->determineStatus();
+                    $model->created_at = time();
+                    $model->created_by = Yii::$app->user->id;
+
+                    if ($model->save()) {
+                        Yii::$app->session->setFlash('success', 'License Activation Key created.');
+                    } else {
+                        var_dump($model->errors);exit;
+                        Yii::$app->session->setFlash('error', 'License Activation Key creation failed, Error: .' . json_encode($model->errors));
+                    }
+                }
+                return $this->redirect(['/LICMAN/lic-app/view', 'id' => $model->lic_app_relId]);
             }
         } else {
             $model->loadDefaultValues();

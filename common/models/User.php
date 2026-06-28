@@ -6,6 +6,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\filters\RateLimitInterface;
 use yii\web\IdentityInterface;
 
 /**
@@ -24,7 +25,7 @@ use yii\web\IdentityInterface;
  * @property integer $updated_at
  * @property string $password write-only password
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
@@ -58,6 +59,36 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
         ];
+    }
+
+    // 1. Define the limits (e.g., 100 requests every 600 seconds)
+    public function getRateLimit($request, $action)
+    {
+        return 100;
+    }
+
+    // 2. Load the remaining allowance directly from Redis
+    public function loadAllowance($request, $action)
+    {
+        // Construct a unique string key specific to this user ID
+        $cacheKey = 'user_rate_limit:' . $this->getId();
+
+        // Fetch the data array from Redis
+        $allowanceData = Yii::$app->redisCache->get($cacheKey);
+
+        // If no data exists in cache yet, return an empty tracking state
+        return is_array($allowanceData) ? $allowanceData : [null, null];
+    }
+
+    // 3. Save the allowance status straight into Redis memory
+    public function saveAllowance($request, $action, $allowance, $timestamp)
+    {
+        $cacheKey = 'user_rate_limit:' . $this->getId();
+        $allowanceData = [$allowance, $timestamp];
+
+        // Store the array in Redis. Set the cache expiration time to match 
+        // your limit window (e.g., 600 seconds) so old keys auto-delete.
+        Yii::$app->redisCache->set($cacheKey, $allowanceData, 600);
     }
 
     /**
@@ -111,7 +142,8 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $token verify email token
      * @return static|null
      */
-    public static function findByVerificationToken($token) {
+    public static function findByVerificationToken($token)
+    {
         return static::findOne([
             'verification_token' => $token,
             'status' => self::STATUS_INACTIVE

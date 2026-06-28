@@ -95,7 +95,7 @@ class LicAppController extends Controller
             $model->params_string_json = json_encode([
                 'organization_name' => $model->orgRel->name ?? '',
                 'organization_code' => $model->orgRel->code ?? '',
-                'dec_key' => $key_pairs[1], // set dec_key to the generated private key
+                'dec_key' => $key_pairs[1], // set dec_key to the generated public key
             ]); // set default params to empty array
         }
 
@@ -110,7 +110,7 @@ class LicAppController extends Controller
                         'enc_key' => $model->enc_key,
                         'status' => $model->status,
                         'release_date' => $model->release_date,
-                        'dec_key' => $key_pairs[1], // set dec_key to the generated private key
+                        'dec_key' => $key_pairs[1], // set dec_key to the generated public key
                     ]); // set default params to empty array
                     $model->params_array_serialized = openssl_encrypt($model->params_string_json, 'aes-256-cbc', $model->enc_key, 0, substr($model->enc_key, 0, 16));
                     $model->created_at = time();

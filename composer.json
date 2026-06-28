@@ -40,8 +40,9 @@
         "phpoffice/phpspreadsheet": "^4.2",
         "br0sk/yii2-pusher": "^1.0",
         "yiisoft/yii2-queue": "^2.3",
-        "yiisoft/yii2-redis": "~2.1.0",
-        "vlucas/phpdotenv": "^5.6"
+        "yiisoft/yii2-redis": "^2.1",
+        "vlucas/phpdotenv": "^5.6",
+        "yiisoft/yii2-jui": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

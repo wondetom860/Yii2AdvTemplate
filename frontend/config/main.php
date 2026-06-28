@@ -22,8 +22,17 @@ return [
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
         'session' => [
-            // this is the name of the session cookie used for login on the frontend
-            'name' => 'advanced-frontend',
+            'class' => 'yii\redis\Session',
+            'redis' => 'redis', // Points to the 'redis' component above
+
+            // Optional: Customize your session settings
+            'name' => 'ADV_LTE_YII2_WT', // Custom browser cookie name
+            'timeout' => (86400/2),            // Session expiration in seconds (e.g., 24 hours)
+
+            'cookieParams' => [
+                'httpOnly' => true,        // Mitigates XSS cookie theft
+                'secure' => true,          // Force true if using HTTPS/SSL
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -37,14 +46,13 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-       
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+            'rules' => [],
         ],
-        
+
     ],
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',

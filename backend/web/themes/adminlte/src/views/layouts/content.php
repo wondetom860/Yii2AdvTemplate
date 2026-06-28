@@ -1,5 +1,6 @@
 <?php
 /* @var $content string */
+
 /**
  * @var string $content
  */
@@ -17,7 +18,7 @@ use yii\bootstrap5\Breadcrumbs;
                     echo Breadcrumbs::widget([
                         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                         'options' => [
-                            'class' => 'breadcrumb float-sm-left'
+                            'class' => 'breadcrumb float-sm-right'
                         ]
                     ]);
                     ?>

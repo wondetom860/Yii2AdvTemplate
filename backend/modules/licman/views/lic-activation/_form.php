@@ -1,5 +1,6 @@
 <?php
 
+use backend\modules\licman\models\LicActivation;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -12,27 +13,18 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'lic_app_relId')->textInput() ?>
+    <?php
+    Html::activeHiddenInput($model, 'lic_app_relId');
+    Html::activeHiddenInput($model, 'dec_key');
+    Html::activeHiddenInput($model, 'activation_code');
+    ?>
 
-    <?= $form->field($model, 'activation_code')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'activation_date')->widget(yii\jui\DatePicker::class, [
+        'dateFormat' => 'yyyy-MM-dd',
+        'options' => ['class' => 'form-control'],
+    ]) ?>
 
-    <?= $form->field($model, 'activation_date')->textInput() ?>
-
-    <?= $form->field($model, 'active_duration')->textInput() ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'dec_key')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'created_by')->textInput() ?>
-
-    <?= $form->field($model, 'updated_by')->textInput() ?>
-
-    <?= $form->field($model, 'data')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'active_duration')->textInput()->hint('Active Duration in days') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

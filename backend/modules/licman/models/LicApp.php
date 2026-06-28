@@ -35,14 +35,13 @@ class LicApp extends \yii\db\ActiveRecord
         1 => 'Active',
     ];
 
-    public static function getAppStatusText($status)
+    public static function getAppStatusText($status = NULL)
     {
         return self::$app_status[$status] ?? 'Unknown';
     }
 
-    public function getStatusLabel()
+    public function activate()
     {
-        // look for any active activation entry exists.
         $activeActivation = $this->getLicActivations()->where(['status' => 1])->exists();
         if ($activeActivation) {
             if ($this->status != 1) {
@@ -54,6 +53,12 @@ class LicApp extends \yii\db\ActiveRecord
             }
         }
         $this->update(false, ['status']);
+    }
+
+    public function getStatusLabel()
+    {
+        // look for any active activation entry exists.
+        $this->activate();
         return self::getAppStatusText($this->status);
     }
 
@@ -104,6 +109,11 @@ class LicApp extends \yii\db\ActiveRecord
             'updated_by' => 'Updated By',
             'data' => 'Data',
         ];
+    }
+
+    public function getAppHeader()
+    {
+        return "{$this->name}: [{$this->orgRel->code}]";
     }
 
     public function suchExists($id = null)

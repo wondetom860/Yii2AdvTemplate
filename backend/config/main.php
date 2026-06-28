@@ -27,8 +27,17 @@ return [
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
         'session' => [
-            // this is the name of the session cookie used for login on the backend
-            'name' => 'advanced-backend',
+            'class' => 'yii\redis\Session',
+            'redis' => 'redis', // Points to the 'redis' component above
+
+            // Optional: Customize your session settings
+            'name' => 'ADV_LTE_YII2_WT', // Custom browser cookie name
+            'timeout' => (86400 / 2),            // Session expiration in seconds (e.g., 24 hours)
+
+            'cookieParams' => [
+                'httpOnly' => true,        // Mitigates XSS cookie theft
+                'secure' => true,          // Force true if using HTTPS/SSL
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -67,16 +76,7 @@ return [
             ],
         ],
     ],
-    'as access' => [
-        'class' => 'mdm\admin\components\AccessControl',
-        'allowActions' => [
-            'gii/*',
-            'user/*',
-            'admin/*',
-            'site/*',
-            'LICMAN/*'
-        ]
-    ],
+
     'params' => $params,
     'modules' => [
         'admin' => [
@@ -88,5 +88,15 @@ return [
         'LICMAN' => [
             'class' => 'backend\modules\licman\LICMan',
         ],
+    ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'gii/*',
+            'user/*',
+            'admin/*',
+            'site/*',
+            'LICMAN/*'
+        ]
     ],
 ];

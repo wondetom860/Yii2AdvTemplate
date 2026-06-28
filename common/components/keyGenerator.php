@@ -8,7 +8,7 @@ class keyGenerator
     public function keyGenerator()
     {
         $config = [
-            "private_key_bits" => 2048,
+            "private_key_bits" => 4096,
             "private_key_type" => OPENSSL_KEYTYPE_RSA,
         ];
 

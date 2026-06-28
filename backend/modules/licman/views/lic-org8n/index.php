@@ -34,8 +34,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'name',
             'code',
-            'created_at',
-            'updated_at',
+            [
+                'attribute' => 'created_at',
+                'format' => ['date', 'php:dMY'],
+            ],
+            [
+                'attribute' => 'created_by',
+                'value' => function ($model) {
+                    return $model->createdBy ? $model->createdBy->username : null;
+                },
+            ],
+            // 'updated_at',
             //'created_by',
             //'updated_by',
             //'data:ntext',
