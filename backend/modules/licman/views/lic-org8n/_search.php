@@ -15,27 +15,21 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="row row-cols-1 row-cols-md-3 mr-n2 ml-n2">
+        <div class="col-md-5 col-sm-5 col-12">
+            <?= $form->field($model, 'name') ?>
+        </div>
+        <div class="col-md-5 col-sm-5 col-12">
+            <?= $form->field($model, 'code') ?>
+        </div>
 
-    <?= $form->field($model, 'name') ?>
-
-    <?= $form->field($model, 'code') ?>
-
-    <?= $form->field($model, 'created_at') ?>
-
-    <?= $form->field($model, 'updated_at') ?>
-
-    <?php // echo $form->field($model, 'created_by') ?>
-
-    <?php // echo $form->field($model, 'updated_by') ?>
-
-    <?php // echo $form->field($model, 'data') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <div class="col-md-2 col-sm-2 col-12"><br>
+            <div class="form-group mt-2 pull-right">
+                <?= Html::submitButton('Search', ['class' => 'btn btn-xs btn-primary']) ?>
+                <?= Html::resetButton('Reset', ['class' => 'btn btn-xs btn-outline-secondary']) ?>
+            </div>
+        </div>
     </div>
-
     <?php ActiveForm::end(); ?>
 
 </div>

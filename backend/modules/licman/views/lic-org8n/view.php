@@ -33,15 +33,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'code',
             [
-                'attribute' => 'created_at',
-                'format' => ['date', 'php:dMY@H:i'],
-            ],
-            [
                 'attribute' => 'apps',
                 'format' => 'raw',
                 'value' => function ($model) {
                     return $this->render('__reports/__apps', ['model' => $model]);
                 },
+            ],
+            [
+                'attribute' => 'created_at',
+                'format' => ['date', 'php:dMY@H:i'],
             ],
             [
                 'attribute' => 'created_by',

@@ -4,6 +4,7 @@ namespace backend\modules\licman\models;
 
 use Yii;
 use common\models\User;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "lic_app".
@@ -35,18 +36,29 @@ class LicApp extends \yii\db\ActiveRecord
         1 => 'Active',
     ];
 
+    public $active_license = '';
+
     public static function getAppStatusText($status = NULL)
     {
         return self::$app_status[$status] ?? 'Unknown';
     }
 
+    public function getActiveLicenseText()
+    {
+        $this->activate();
+        $activeActivation = $this->status == 1;
+        // return $activeActivation ? 'Active' : 'Inactive';
+        return $this->active_license ? Html::a($this->active_license, ['view', 'id' => $this->id]) : 'Inactive';
+    }
+
     public function activate()
     {
-        $activeActivation = $this->getLicActivations()->where(['status' => 1])->exists();
+        $activeActivation = $this->getLicActivations()->where(['status' => 1])->one();
         if ($activeActivation) {
             if ($this->status != 1) {
                 $this->status = 1;
             }
+            $this->active_license = $activeActivation->activation_code;
         } else {
             if ($this->status != 0) {
                 $this->status = 0;

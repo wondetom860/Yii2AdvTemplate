@@ -57,7 +57,7 @@ class LicOrg8nController extends Controller
         $searchModel = new LicOrg8nSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render('index_lv', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

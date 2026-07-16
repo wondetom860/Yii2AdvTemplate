@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 
+/** @var string $assetDir */
+
 ?>
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-red navbar-dark">

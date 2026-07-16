@@ -51,6 +51,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
+                'attribute' => 'active_license',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    $text = $model->status == 1 ? 'bg-success' : 'bg-danger';
+                    $active_status_text = $model->getActiveLicenseText();
+                    return "<span class='badge {$text}'>{$active_status_text}</span>";
+                }
+            ],
+            [
                 'attribute' => 'status',
                 'format' => 'raw',
                 'value' => function ($model) {

@@ -2,7 +2,7 @@
 
 
 if (isset($model)) {
-    $createBtn = "<button class='btn btn-xs btn-warning pull-right float-right' title='Create New License Entery for this organization' onclick='createLicenceActivation({$model->id});return false;'>Grant New Licence</button>";
+    $createBtn = $model->status == 1 ? "" : "<button class='btn btn-xs btn-warning pull-right float-right' title='Create New License Entery for this organization' onclick='createLicenceActivation({$model->id});return false;'>Grant New Licence</button>";
     echo "<h5 style='text-align: center;'>Licenses and Activation of <i><u>{$model->name}</u></i> for <u><i>{$model->orgRel->name}</i></u>{$createBtn}</h5>";
     echo "<table class='table table-sm table-condensed table-hover' style='font-size: 9pt;'>
             <thead>
