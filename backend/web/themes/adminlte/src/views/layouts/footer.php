@@ -1,4 +1,4 @@
-<footer class="main-footer">
+<footer class="main-footer bg-dark">
     <strong>Copyright &copy; <?= date('Y') ?> <a href="https://github.com/wondetom860/<?= Yii::$app->params['APP_NAME'] ?>.git"><?= Yii::$app->params['APP_NAME'] ?></a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
