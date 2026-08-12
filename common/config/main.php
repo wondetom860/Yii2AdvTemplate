@@ -51,8 +51,8 @@ return [
             'authTimeout' => 1000,  //Number of second to Automatic Logout if inactive
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => false],
         ],
-        // 'assetManager' => [
-        //     'appendTimestamp' => true,
-        // ],
+        'assetManager' => [
+            'appendTimestamp' => true,
+        ],
     ],
 ];

@@ -85,9 +85,9 @@ return [
             //     // 'main' => 'main.php',
             // ],
         ],
-        'LICMAN' => [
-            'class' => 'backend\modules\licman\LICMan',
-        ],
+        // 'LICMAN' => [
+        //     'class' => 'backend\modules\licman\LICMan',
+        // ],
     ],
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
@@ -96,7 +96,7 @@ return [
             'user/*',
             'admin/*',
             'site/*',
-            'LICMAN/*'
+            // 'LICMAN/*'
         ]
     ],
 ];
